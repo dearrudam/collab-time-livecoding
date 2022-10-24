@@ -1,45 +1,35 @@
 package io.github.dearrudam;
 
 import java.util.Comparator;
-import java.util.Objects;
 
 public class QuickSort {
+
     public static <T> void sort(T[] array, Comparator<T> comparator) {
-        if(Objects.isNull(array))
-            return;
-        if(Objects.isNull(comparator))
-            return;
-        // [5,4,3,2,1]
-        quickSort(array, comparator, 0, array.length - 1);
+        quicksort(array, comparator, 0, array.length - 1);
     }
 
-    private static <T> void quickSort(T[] array, Comparator<T> comparator, int left, int right) {
-        if(left < right) {
-            int pivo = partitioning(array, comparator, left, right);
-            quickSort(array, comparator, left, pivo - 1);
-            quickSort(array, comparator, pivo, right);
+    private static <T> void quicksort(T[] array,
+                                      Comparator<T> comparator,
+                                      int lower, int higher) {
+        if (lower >= higher) {
+            return;
         }
+        // 4 - encontrando a posição correta do pivo;
+        int pivot = partition(array, comparator, lower, higher);
+
+        // 5 - executa o mesmo processo para os itens à esquerda do pivo se lower > higher;
+        quicksort(array, comparator, lower, pivot - 1);
+
+        // 6 - executa o mesmo processo para os itens à direita do pivo lower > higher;
+        quicksort(array, comparator, pivot + 1, higher);
+
     }
 
-    private static <T> int partitioning(T[] array, Comparator<T> comparator, int left, int right) {
-        if(left < right) {
-            int pivo = right / 2;
-            while (left < right) {
-                while (comparator.compare(array[left], array[pivo]) <= 0) {
-                    left++;
-                }
-                while (comparator.compare(array[right], array[pivo]) > 0) {
-                    right--;
-                }
-                if (left <= right) {
-                    var temp = array[left];
-                    array[left] = array[right];
-                    array[right] = temp;
-                    left++;
-                    right--;
-                }
-            }
-        }
-        return left;
+    private static <T> int partition(T[] array, Comparator<T> comparator, int lower, int higher) {
+        // 1 - definir o pivo ( é a metade do array)
+        var pivotValue = array[(lower + higher) / 2];
+        // 2 - separa os valores menores que o pivo à esquerda;
+        // 3 - separa os valores maiores que o pivo à direita;
+        return -1;
     }
 }
