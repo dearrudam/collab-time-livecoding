@@ -41,16 +41,20 @@ public class QuickSortTest {
     @ParameterizedTest(name = "{index} - quando ordenar o array: {0}, o ordem deve ser {1}")
     @MethodSource("test04Args")
     public void test04(Integer[] array, Integer[] arrayOrdenado) {
-            QuickSort.sort(array, Integer::compareTo);
-            assertArrayEquals(arrayOrdenado,array);
+        QuickSort.sort(array, Integer::compareTo);
+        assertArrayEquals(arrayOrdenado, array);
     }
 
-    public static Stream<Arguments> test04Args(){
+    public static Stream<Arguments> test04Args() {
         return Stream.of(
-          arguments(
-                  new Integer[]{5,4,3,2,1},
-                  new Integer[]{1,2,3,4,5}
-          )
+                arguments(
+                        new Integer[]{5, 4, 3, 2, 1},
+                        new Integer[]{1, 2, 3, 4, 5}
+                ),
+                arguments(
+                        new Integer[]{32, 11, 26, 59, 66, 78, 90},
+                        new Integer[]{11, 26, 32, 59, 66, 78, 90}
+                )
         );
     }
 
